@@ -24,7 +24,8 @@ use("MERN_DB");
 // ? find movies whose rating average is not 9
 // db.movies_db.find({"rating.average":{$ne:9}},{name:1,"rating.average":1})
 // ?find movies whose genre includes Action and Crime
-// db.movies_db.find({genre:{$all:["Action","Crime"]}})
+// db.movies_db.find()
+db.movies_db.find({ genres: { $all: ["Action", "Crime"] } });
 // ? find movies whose status is ended
 // db.movies_db.find({status:"Ended"})
 // ? find movies whose genre is thriller

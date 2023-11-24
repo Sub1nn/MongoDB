@@ -1,4 +1,4 @@
-use("MERN_DB");
+// use("MERN_DB");
 
 //  db.student.find()
 // db.student.findOne({name:"Nikita"})
