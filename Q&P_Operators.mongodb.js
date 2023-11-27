@@ -25,7 +25,7 @@ use("MERN_DB");
 // db.movies_db.find({"rating.average":{$ne:9}},{name:1,"rating.average":1})
 // ?find movies whose genre includes Action and Crime
 // db.movies_db.find()
-db.movies_db.find({ genres: { $all: ["Action", "Crime"] } });
+// db.movies_db.find({ genres: { $all: ["Action", "Crime"] } });
 // ? find movies whose status is ended
 // db.movies_db.find({status:"Ended"})
 // ? find movies whose genre is thriller
@@ -37,3 +37,6 @@ db.movies_db.find({ genres: { $all: ["Action", "Crime"] } });
 // ! using $text for explicit search
 // ? find movies whose rating average is either 6 or 6.5 or 9 or 8 or 8.5 or 8.6 or 7.7 or 6.1 or 7.8
 // db.movies_db.find({"rating.average":{$in:[6,6.5,9,8,8.5,7.7,6.1,7.8]}})
+// db.movies_db.find({},{image:0,summary:0,updated:0,url:0,officialSite:0,_links:0})
+// db.movies_db.find({"schedule.days": "Friday"})
+db.movies_db.find({}, { name: 1, "rating.average": 1 }).limit(5);
