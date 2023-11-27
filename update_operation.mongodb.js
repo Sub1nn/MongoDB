@@ -31,7 +31,7 @@ use("MERN_DB");
 // db.friends.updateOne({name:"Dipesh"},{$mul:{age:0.25}})
 
 // ? $rename
-// db.friends.updateMany({}, { $rename: { name: "firstName" } });
+// db.friends.updateMany({}, { $rename: { firstName: "name" } });
 
 // ? set a location field object with temporary and permanent
 // db.friends.updateMany({},{
@@ -191,16 +191,23 @@ use("MERN_DB");
 // })
 
 // ? $[element] with arrayFilters
-db.friends.updateOne(
-  { name: "Nikita" },
-  {
-    $set: {
-      "scores.$[element]": 100,
-    },
-  },
-  {
-    arrayFilters: [{ element: { $lt: 50 } }],
-  }
-);
+// db.friends.updateOne(
+//   { name: "Nikita" },
+//   {
+//     $set: {
+//       "scores.$[element]": 100,
+//     },
+//   },
+//   {
+//     arrayFilters: [{ element: { $lt: 50 } }],
+//   }
+// );
+
+// add age field where name is Nikita
+// db.friends.updateOne({name:"Nikita"},{
+//     $set:{
+//         age:25
+//     }
+// })
 
 db.friends.find();
