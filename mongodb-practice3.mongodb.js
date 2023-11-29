@@ -155,19 +155,54 @@ use("MERN_DB");
 
 // ? Place name and age property at the top
 
-db.friends.aggregate([
+// ? Retrieve the names of individuals who have a frequency greater than 5 in any sport.
+// db.friends.find({"sportData.frequency":{$gt:5}},{name:1})
+
+// db.friends.find({sportData:{$elemMatch:{
+//   frequency:{$gt:5}
+// }}},{name:1,_id:0})
+
+// ? Find individuals who have "Football" in their list of sports and return their names and ages.
+// db.friends.find({"sportData.title":"Football"},{name:1,age:1})
+
+// ? Create a query to retrieve the names and subjects of individuals older than 30.
+// db.friends.find({age:{$gt:30}},{name:1,Subjects:1,_id:0})
+
+// ?  Find individuals who have "Singing" as one of their hobbies and have a frequency greater than 5 in any sport.
+// db.friends.find({hobbies:"Singing","sportData.frequency":{$gt:5}})
+
+// ? find documents where the "sportData" array contains an element with "title" equal to "Football" and "frequency" greater than 5.
+
+// db.friends.find({"sportData.title":"Football","sportData.frequency":{$gt:7}})
+
+// db.friends.find({sportData:{$elemMatch:{
+//   title:"Football",
+//   frequency:{$gt:5}
+// }}},{name:1})
+
+// ? Increase the age of individuals who have "Books" as one of their hobbies by 5 years.
+
+// db.friends.updateMany({hobbies:"Singing"},{
+//   $inc:{
+//     age:-5
+//   }
+// })
+
+// ? Add a new subject "Computer Science" with a score of 80 to individuals who have a frequency greater than 10 in any sport.
+
+db.friends.updateMany(
+  { "sportData.frequency": { $gt: 10 } },
   {
-    $project: {
-      _id: 1,
-      name: 1,
-      age: 1,
-      hobbies: 1,
-      sportData: 1,
-      location: 1,
-      scores: 1,
-      Subjects: 1,
+    $set: {
+      "Subjects.Computer Science": 80,
     },
-  },
-]);
+  }
+);
+// db.friends.updateOne({name:"Nikita"},{
+//   $unset:{
+//     frequency:12,
+//     subjects:{}
+//   }
+// })
 
 db.friends.find();
