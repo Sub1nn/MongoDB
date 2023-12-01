@@ -112,7 +112,7 @@ use("MERN_DB");
 //     }
 // })
 
-// ? $pullAll => removes multiple values(no conditions can be applied)
+// ? $pullAll => removes multiple values => removes all matching values from an array(no conditions can be applied)
 
 // db.friends.updateOne({name:"Nikita"},{
 //     $pullAll:{
@@ -126,14 +126,21 @@ use("MERN_DB");
 //     }
 // })
 
-// ? $addToSet => uniqueness of array
+// ? $addToSet => uniqueness of array => Adds elements to an array only if they do not already exist in the set.
 // db.friends.updateOne({},{
 //     $addToSet:{
 //         scores:{$each:[45,55,55,75,45,65,75,75]}
 //     }
 // })
 
-// ? $
+// ? $min => compares the value of the field and changes only if the newly given value is minimum then the existing value
+// db.friends.updateOne({name:"Nikita"},{
+//     $min:{
+//         "Subjects.Maths":67
+//     }
+// })
+
+// ? $ => Acts as a placeholder to update the first element that matches the query condition.
 
 // db.friends.updateOne({name:"Nikita",scores:45},{
 //     $set:{
@@ -141,7 +148,6 @@ use("MERN_DB");
 //     }
 // })
 
-// ? can avoid the name field as its the 1st document
 // db.friends.updateOne({scores:46},{
 //     $set:{
 //         "scores.$":49
@@ -178,6 +184,7 @@ use("MERN_DB");
 //     }
 // })
 
+// ? $[] => Acts as a placeholder to update all elements in an array for the documents that match the query condition.
 // db.friends.updateOne({firstName:"Dipesh"},{
 //     $set:{
 //         "hobbies.$[]": "Cricket"
@@ -221,5 +228,44 @@ use("MERN_DB");
 //     "hobbies.$":"Singing"
 //    }
 // })
+// ? change Books to Stories in hobbies
+// db.friends.updateOne(
+//   { name: "Dipesh", hobbies: "Books" },
+//   {
+//     $set: {
+//       "hobbies.$": "Stories",
+//     },
+//   }
+// );
+
+// ? changing the score value of 95 to 100 can be done as below
+// db.friends.updateOne({name:"Nikita",scores:95},{
+//     $set:{
+//         "scores.$":100
+//     }
+// })
+
+// ? But if we want to increase or decrease a specific value we have to use [element] with arrayFilters
+// db.friends.updateOne({name:"Nikita"},{
+//     $inc:{
+//         "scores.$[elem]":-10
+//     }
+// },{
+//     arrayFilters:[{elem:100}]
+// })
+
+// ? $position => The $position modifier specifies the location in the array at which the $push operator inserts elements. To use the $position modifier, it must appear with the $each modifier.
+
+db.friends.updateOne(
+  { name: "Nikita" },
+  {
+    $push: {
+      hobbies: {
+        $each: ["PUBG"],
+        $position: 0,
+      },
+    },
+  }
+);
 
 db.friends.find();
