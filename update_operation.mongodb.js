@@ -210,4 +210,16 @@ use("MERN_DB");
 //     }
 // })
 
+// ? For Dipesh change the sport title of Badminton to tennis and change its frequency to 3.
+// db.friends.updateOne({name:"Dipesh","sportData.title":"Badminton","sportData.frequency":7},{
+//     $set:{"sportData.$.title":"Tennis", "sportData.$.frequency":3}
+// })
+
+// ? In the hobbies list change the hobby swimming to singing
+// db.friends.updateOne({name:"Dipesh",hobbies:"Swimming"},{
+//    $set:{
+//     "hobbies.$":"Singing"
+//    }
+// })
+
 db.friends.find();

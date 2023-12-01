@@ -190,14 +190,14 @@ use("MERN_DB");
 
 // ? Add a new subject "Computer Science" with a score of 80 to individuals who have a frequency greater than 10 in any sport.
 
-db.friends.updateMany(
-  { "sportData.frequency": { $gt: 10 } },
-  {
-    $set: {
-      "Subjects.Computer Science": 80,
-    },
-  }
-);
+// db.friends.updateMany(
+//   { "sportData.frequency": { $gt: 10 } },
+//   {
+//     $set: {
+//       "Subjects.Computer Science": 80,
+//     },
+//   }
+// );
 // db.friends.updateOne({name:"Nikita"},{
 //   $unset:{
 //     frequency:12,
