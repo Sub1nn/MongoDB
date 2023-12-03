@@ -38,10 +38,39 @@ use("MERN_DB");
 //   },
 // ]);
 
+// db.learners.aggregate([
+//   {
+//     $match: {
+//       name: "Sujit Sharma",
+//     },
+//   },
+//   {
+//     $lookup: {
+//       from: "courses",
+//       localField: "course",
+//       foreignField: "_id",
+//       as: "courseData",
+//     },
+//   },
+//   {
+//     $project: {
+//       name: 1,
+//       address: 1,
+//       phone: 1,
+//       _id: 0,
+//       courseDetails: {
+//         name: { $first: "$courseData.name" },
+//         price: { $first: "$courseData.price" },
+//         duration: { $first: "$courseData.duration" },
+//       },
+//     },
+//   },
+// ]);
+
 db.learners.aggregate([
   {
     $match: {
-      name: "Sujit Sharma",
+      name: "Sahil Khatiwoda",
     },
   },
   {
@@ -57,11 +86,10 @@ db.learners.aggregate([
       name: 1,
       address: 1,
       phone: 1,
-      _id: 0,
-      courseDetails: {
-        name: { $first: "$courseData.name" },
-        price: { $first: "$courseData.price" },
-        duration: { $first: "$courseData.duration" },
+      CourseDetails: {
+        name: { $arrayElemAt: ["$courseData.name", 0] },
+        duration: { $arrayElemAt: ["$courseData.duration", 0] },
+        price: { $arrayElemAt: ["$courseData.price", 0] },
       },
     },
   },
