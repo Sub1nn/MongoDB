@@ -38,6 +38,14 @@ use("MERN_DB");
 //   },
 // ]);
 
+// ? $lookup => used to perform a left outer join between documents from two collections. It allows you to enrich the documents in the input collection with fields from another collection based on a specified condition.
+
+// ! $lookup basically take four fields:
+/*from: The name of the collection to perform the join with.
+localField: The field from the input documents. It's used as the "join key" in the input collection.
+foreignField: The field from the documents in the "from" collection. It's used as the "join key" in the "from" collection.
+as: The name for the new array field that will contain the joined documents*/
+
 // db.learners.aggregate([
 //   {
 //     $match: {
